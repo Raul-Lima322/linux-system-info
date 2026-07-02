@@ -10,12 +10,11 @@ dividir() {
 }
 
 clear
-dividir
-clear
 echo -e "${amarelo}                  Inf do Sistema             ${reset}"
 
 dividir
 
+#Informaçoẽs do sistema operacional
 echo -e "${verde}[-]Informações de SO ${reset}"
 echo ""
 echo -e "User: $(whoami)"
@@ -23,17 +22,21 @@ echo -e "Sistema: $(uname -o)"
 echo -e "Kernel: $(uname -r)"
 dividir
 
+#Cpu (Processador)
 echo -e "${verde}[-]Processador ${reset}" 
 echo ""
-echo "Modelo: $(grep -m 1 'model name' /proc/cpuinfo | cut -d: -f2 | sed 's/^[ \t]*//') e $(grep -c 'processor' /proc/cpuinfo) Threads"
+echo "Cpu: $(grep -m 1 'model name' /proc/cpuinfo | cut -d: -f2 | sed 's/^[ \t]*//') e $(grep -c 'processor' /proc/cpuinfo) Threads"
 dividir
 
+#Memória Ram
 echo -e "${verde}[-]Memória Ram ${reset}"
 echo ""
 echo "$(free -h | grep -E "Total|Mem" | awk '{print "Total:           " $2 "\nEm Uso:          " $3 "\nLivre:           " $4}')"
 dividir
 
+#Rede
 echo -e "${verde}[-]Rede${reset}"
 echo ""
-echo "Ip local: $(hostname -i)"
+echo "Ip local: $(hostname -I | awk '{print$1}')"
 echo "Ip publico: $(curl -s ifconfig.me || echo 'Erro ao conectar')"
+dividir
