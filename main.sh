@@ -17,9 +17,10 @@ dividir
 #Informaçoẽs do sistema operacional
 echo -e "${verde}[-]Informações de SO ${reset}"
 echo ""
-echo -e "User: $(whoami)"
-echo -e "Sistema: $(uname -o)"
-echo -e "Kernel: $(uname -r)"
+echo "User: $(whoami)"
+echo "Sistema: $(uname -o)"
+echo "Distro: $(hostnamectl | awk -F: '/Operating System/ {print substr($2, 2)}')"
+echo "Kernel: $(uname -r)"
 dividir
 
 #Cpu (Processador)
@@ -31,7 +32,7 @@ dividir
 #Memória Ram
 echo -e "${verde}[-]Memória Ram ${reset}"
 echo ""
-echo "$(free -h | grep -E "Total|Mem" | awk '{print "Total:           " $2 "\nEm Uso:          " $3 "\nLivre:           " $4}')"
+echo "$(free -h | grep -E "Total|Mem" | awk '{print "Total:           " $2 "\nEm Uso:          " $3 "\nLivre:           " $7}')"
 dividir
 
 #Rede
